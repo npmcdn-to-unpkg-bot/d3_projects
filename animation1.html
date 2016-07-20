@@ -7,8 +7,6 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <p align = "center"> D3 </p>
 
-
-
 <script>
 
 	var bodySelection = d3.select("body");
@@ -17,19 +15,25 @@
   																.attr("height", 200);
 
 	var mySquare = svgContainer.append("rect")   
-														 .attr("x",60)   
+														 .attr("x",10)   
 														 .attr("y",60)   
 														 .attr("width",60)   
 														 .attr("height",60);
 														 
-	mySquare.transition().attr("x",320) // transition to right
-			.attr("width",120)// will make it bigger
-			.style("fill","white") // if the fill is originally left blank and comes from a style sheet, it will start as black    
-			//.style("opacity",0); // make it disappear
-;
-
+	//mySquare.transition().attr("x",400) // transition to right
+		//	.attr("width",120)// will make it bigger
+			//.style("fill","blue") // if the fill is originally left blank and comes from a style sheet, it will start as black    
+			//.style("opacity",0) // make it disappear
+    ;
+  	
+	function myFunction() {   
+		mySquare.transition().attr("x",320); 
+		}
 
 </script>
+
+<button id="button" onclick="myFunction()">Transition</button>
+
 
 
 
