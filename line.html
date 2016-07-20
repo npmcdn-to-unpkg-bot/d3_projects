@@ -1,0 +1,53 @@
+
+
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+	var lineData = [ 
+                   { "x": 5,  "y": 105},  { "x": 20, "y": 80},
+                   { "x": 30,  "y": 70}, { "x": 55,  "y": 10},
+                   { "x": 75,  "y": 50}, { "x": 95,  "y": 40},];
+	
+	
+	
+	
+	var lineFunction = d3.svg.line()
+                          .x(function(d) { return d.x; })
+                          .y(function(d) { return d.y; })
+                          .interpolate("linear");	
+                          
+  var bodySelection = d3.select("body");
+  var svgContainer = bodySelection.append("svg")
+  																.attr("width", 200)
+  																.attr("height", 200);
+  
+  //The line SVG Path we draw
+  var lineGraph = svgContainer.append("path")
+	                            .attr("d", lineFunction(lineData))
+	                            .attr("stroke", "blue")
+	                            .attr("stroke-width", 2)
+	                            .attr("fill", "none");	
+	
+</script>
+
+
+
+
+
+</br>
+<script>
+var svgContainer = d3.select("body").append("svg").attr("width", 200).attr("height", 200);
+svgContainer.append("line").attr("x1", 5).attr("y1", 5).attr("x2", 50).attr("y2", 50).attr("stroke-width", 2).attr("stroke", "black");
+</script>	
+
+</body>
+</html>
+
+

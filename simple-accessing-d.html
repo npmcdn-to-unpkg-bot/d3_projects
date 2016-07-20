@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  background: #000;
+}
+
+path {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+	var theData = [ 1, 2, 3 ]
+	var p = d3.select("body").selectAll("p")
+		.data(theData)
+		.enter()
+		.append("p")
+		.text(function (d,i) {
+			return "i = " + i + " d = "+d;
+    });
+</script>
+
+</body>
+</html>

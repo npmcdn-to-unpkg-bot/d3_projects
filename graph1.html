@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<p align = "center"> D3 </p>
+
+
+
+<script>
+	var lineData = [ 
+                   { "x": 0,  "y": 200},  { "x": 50, "y": 130},
+                   { "x": 90,  "y": 190}, { "x": 120,  "y": 10},
+                   { "x": 160,  "y": 50}, { "x": 200,  "y": 40},
+                   { "x": 230,  "y": 200},  { "x": 250, "y": 130},
+                   { "x": 290,  "y": 190}, { "x": 320,  "y": 10},
+                   { "x": 360,  "y": 50}, { "x": 400,  "y": 40},];
+	
+	
+	
+	
+	var lineFunction = d3.svg.line()
+                          .x(function(d) { return d.x; })
+                          .y(function(d) { return d.y; })
+                          .interpolate("linear");	
+                          
+  var bodySelection = d3.select("body");
+  var svgContainer = bodySelection.append("svg")
+  																.attr("width", 400)
+  																.attr("height", 200);
+  
+  //The line SVG Path we draw
+  var lineGraph = svgContainer.append("path")
+	                            .attr("d", lineFunction(lineData))
+	                            .attr("stroke", "blue")
+	                            .attr("stroke-width", 2)
+	                            .attr("fill", "none");	
+	
+</script>
+</br>
+<script>
+
+//Create the SVG Viewport
+var svgContainer = d3.select("body").append("svg")
+                                     .attr("width",400)
+                                     .attr("height",200);
+
+//Create the Scale we will use for the Axis
+var axisScale = d3.scale.linear()
+                         .domain([0, 200])
+                         .range([0, 400]);
+//Create the Axis
+var xAxis = d3.svg.axis()
+                   .scale(axisScale);
+//Create an SVG group Element for the Axis elements and call the xAxis function
+var xAxisGroup = svgContainer.append("g")
+                              .call(xAxis);
+</script>
+
+</body>
+</html>
