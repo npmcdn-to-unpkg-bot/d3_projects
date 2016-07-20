@@ -39,13 +39,15 @@ var colors = d3.scale.linear()
 .domain([0, chartdata.length*.33, chartdata.length*.66, chartdata.length])
 .range(['#d6e9c6', '#bce8f1', '#faebcc', '#ebccd1'])
 
+var dynamicColor;
+
 d3.select('#bar-chart').append('svg')
   .attr('width', width)
   .attr('height', height)
   .style('background', '#dff0d8')
   .selectAll('rect').data(chartdata)
   .enter().append('rect')
-    .style({'fill': function(data,i){return colors(i);}, 'stroke': '#d6e9c6', 'stroke-width': '5'})
+    .style({'fill': function(data,i){return colors(i);},  'stroke': '#31708f', 'stroke-width': '5'})
     .attr('width', xScale.rangeBand())
     .attr('height', function (data) {
         return yScale(data);
@@ -55,6 +57,16 @@ d3.select('#bar-chart').append('svg')
     })
     .attr('y', function (data) {
         return height - yScale(data);
+    })
+    .on('mouseover', function(data) {
+        dynamicColor = this.style.fill;
+        d3.select(this)
+            .style('fill', '#3c763d')
+    })
+ 
+    .on('mouseout', function(data) {
+        d3.select(this)
+            .style('fill', dynamicColor)
     });
 </script>
 </br>
