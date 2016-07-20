@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<p align = "center"> D3 </p>
+
+
+
+<script>
+	var lineData = [ 
+                   { "x": 0,  "y": 200},  { "x": 50, "y": 130},
+                   { "x": 90,  "y": 190}, { "x": 120,  "y": 10},
+                   { "x": 160,  "y": 50}, { "x": 200,  "y": 40},
+                   { "x": 230,  "y": 200},  { "x": 250, "y": 130},
+                   { "x": 290,  "y": 190}, { "x": 320,  "y": 10},
+                   { "x": 360,  "y": 50}, { "x": 400,  "y": 40},];
+	
+	
+	
+	
+	var lineFunction = d3.svg.line()
+                          .x(function(d) { return d.x; })
+                          .y(function(d) { return d.y; })
+                          .interpolate("linear");	
+                          
+  var bodySelection = d3.select("body");
+  var svgContainer = bodySelection.append("svg")
+  																.attr("width", 400)
+  																.attr("height", 200);
+  
+  //The line SVG Path we draw
+  var lineGraph = svgContainer.append("path")
+	                            .attr("d", lineFunction(lineData))
+	                            .attr("stroke", "grey")
+	                            .attr("stroke-width", 2)
+	                            .attr("fill", "none");	
+	
+</script>
+</br>
+<script>
+
+//Create the SVG Viewport
+var svgContainer = d3.select("body").append("svg")
+                                     .attr("width",400)
+                                     .attr("height",200);
+
+//Create the Scale we will use for the Axis
+var axisScale = d3.scale.linear()
+                         .domain([0, 200])
+                         .range([0, 400]);
+//Create the Axis
+var xAxis = d3.svg.axis()
+                   .scale(axisScale);
+//Create an SVG group Element for the Axis elements and call the xAxis function
+var xAxisGroup = svgContainer.append("g")
+                              .call(xAxis);
+</script>
+</br>
+<script>
+var w= 535;
+var h= 250;
+
+var chartData = [
+{"width":25,"height":65,"color":"red"},
+{"width":25,"height":88,"color":"grey"},
+{"width":25,"height":74,"color":"red"},
+{"width":25,"height":80,"color":"grey"},
+{"width":25,"height":86,"color":"red"},
+{"width":25,"height":63,"color":"grey"},
+{"width":25,"height":92,"color":"red"},
+{"width":25,"height":73,"color":"grey"},
+{"width":25,"height":69,"color":"red"},
+{"width":25,"height":88,"color":"grey"},
+{"width":25,"height":97,"color":"red"},
+{"width":25,"height":62,"color":"grey"},
+{"width":25,"height":77,"color":"red"},
+{"width":25,"height":82,"color":"grey"},
+{"width":25,"height":88,"color":"red"},
+{"width":25,"height":92,"color":"grey"},
+{"width":25,"height":80,"color":"red"},
+{"width":25,"height":95,"color":"grey"},
+{"width":25,"height":84,"color":"red"},
+{"width":25,"height":75,"color":"grey"},
+]
+
+var svg= d3.select('body')
+    .append('svg')
+    .attr('width', w)
+    .attr('height', h);
+
+svg.selectAll('rect.colorBar')
+    .data(chartData)
+    .enter()
+    .append('rect')
+    .attr('width', function(d,i){
+        return d.width
+    })
+    .attr('height', function(d,i){
+        return d.height*2
+    })
+    .attr('x', function(d,i){
+        return i * (d.width+2)
+    })
+    .attr('y', function(d,i){
+        return h - d.height*2
+    })
+    .attr('fill', function(d,i){
+        return d.color
+    });
+    
+    
+    
+var xScale = d3.scale.linear()
+    .domain( [0, chartData.length] )
+    .range( [0, w] );
+
+var yScale = d3.scale.linear()
+    .domain( 
+        [0, 
+        d3.max(chartData, function(d) { 
+            return d.height; })
+        ])
+    .range( [0, h] );
+
+var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .ticks(0)
+
+var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left")
+    .ticks(0)
+
+svg.append("g")
+    .attr("transform", 
+    "translate(5,0)")
+    .call(yAxis);
+
+svg.append("g")
+    .attr("transform", 
+    "translate(0," + (h-5) + ")")
+    .call(xAxis);
+                    
+                
+
+</script>
+
+
+
+</body>
+</html>
