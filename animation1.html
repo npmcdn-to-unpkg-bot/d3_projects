@@ -12,22 +12,32 @@
 	var bodySelection = d3.select("body");
   var svgContainer = bodySelection.append("svg")
   																.attr("width", 400)
-  																.attr("height", 200);
+  																.attr("height", 600);
 
 	var mySquare = svgContainer.append("rect")   
 														 .attr("x",10)   
-														 .attr("y",60)   
-														 .attr("width",60)   
+														 .attr("y",85)   
+														 .attr("width",120)   
 														 .attr("height",60);
 														 
-	//mySquare.transition().attr("x",400) // transition to right
-		//	.attr("width",120)// will make it bigger
-			//.style("fill","blue") // if the fill is originally left blank and comes from a style sheet, it will start as black    
-			//.style("opacity",0) // make it disappear
-    ;
+	
+	var myCircle1 = svgContainer.append("circle")   
+														 .attr("cx",100)   
+														 .attr("cy",60)   
+														 .attr("r",25)   
+														 .attr("fill","blue");	
+	var myCircle2 = svgContainer.append("circle")   
+														 .attr("cx",50)   
+														 .attr("cy",60)   
+														 .attr("r",25)   
+														 .attr("fill","red");													 												 
   	
 	function myFunction() {   
-		mySquare.transition().attr("x",320); 
+	  
+		mySquare.transition().attr("y",445).duration(1000) ;
+		myCircle1.transition().attr("cx",320).duration(3000).delay(500) ; 
+		myCircle2.transition().attr("cy",420).duration(1000).ease("elastic").delay(1000) ;
+		 
 		}
 
 </script>
