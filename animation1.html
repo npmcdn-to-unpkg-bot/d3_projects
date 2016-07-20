@@ -34,10 +34,15 @@
   	
 	function myFunction() {   
 	  
-		mySquare.transition().attr("y",445).duration(1000) ;
+		mySquare.transition().attr("y",445).duration(3000)  .each("end",function() { 
+			  // adding a listener to the event end() here  
+				d3.select(this)      // this is the object        
+					.transition().duration(200)         // a new transition!         
+					.attr("y",180); 
+		});
 		myCircle1.transition().attr("cx",320).duration(3000).delay(500) ; 
 		myCircle2.transition().attr("cy",420).duration(1000).ease("elastic").delay(1000) ;
-		 
+		
 		}
 
 </script>
