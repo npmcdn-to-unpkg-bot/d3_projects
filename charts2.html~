@@ -18,10 +18,21 @@
 //  the data that powers the bar chart, a simple array of numeric values
 var chartdata = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120,
                 135, 150, 165, 180, 200, 220, 240, 270, 300, 330, 370, 410]; 
-//  the size of the overall svg element
+
 var height = 200,
     width = 720,
  
+
+    barWidth = 40,
+    barOffset = 20;
+
+var chartdata = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120,
+    135, 150, 165, 180, 200, 220, 240, 270, 300, 330, 370, 410];
+ 
+var margin = {top: 30, right: 10, bottom: 30, left: 50}
+//  the size of the overall svg element 
+var height = 400 - margin.top - margin.bottom,
+    width = 720 - margin.left - margin.right,
 //  the width of each bar and the offset between each bar
     barWidth = 40,
     barOffset = 20;
@@ -40,8 +51,9 @@ var colors = d3.scale.linear()
 .range(['#d6e9c6', '#bce8f1', '#faebcc', '#ebccd1'])
 
 var dynamicColor;
+var colorOnHover = '#3c763d';
 
-d3.select('#bar-chart').append('svg')
+var awesome = d3.select('#bar-chart').append('svg')
   .attr('width', width)
   .attr('height', height)
   .style('background', '#dff0d8')
@@ -49,9 +61,7 @@ d3.select('#bar-chart').append('svg')
   .enter().append('rect')
     .style({'fill': function(data,i){return colors(i);},  'stroke': '#31708f', 'stroke-width': '5'})
     .attr('width', xScale.rangeBand())
-    .attr('height', function (data) {
-        return yScale(data);
-    })
+    .attr('height', 0)
     .attr('x', function (data, i) {
         return xScale(i);
     })
@@ -61,15 +71,32 @@ d3.select('#bar-chart').append('svg')
     .on('mouseover', function(data) {
         dynamicColor = this.style.fill;
         d3.select(this)
-            .style('fill', '#3c763d')
+            .style('fill', colorOnHover)
     })
  
     .on('mouseout', function(data) {
         d3.select(this)
             .style('fill', dynamicColor)
     });
+    
+    awesome.transition()
+    .attr('height', function (data) {
+        return yScale(data);
+    })
+    .attr('y', function (data) {
+        return height - yScale(data);
+    })
+    .delay(function (data, i) {
+        return i * 20;
+    })
+    .duration(2000)
+    .ease('elastic');
+
 </script>
 </br>
+
+
+
 
 
 </body>
