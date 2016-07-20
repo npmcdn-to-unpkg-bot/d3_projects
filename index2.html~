@@ -110,9 +110,6 @@ svg.selectAll('rect.colorBar')
     .attr('fill', function(d,i){
         return d.color
     });
-    
-    
-    
 var xScale = d3.scale.linear()
     .domain( [0, chartData.length] )
     .range( [0, w] );
