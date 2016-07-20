@@ -40,8 +40,9 @@ var colors = d3.scale.linear()
 .range(['#d6e9c6', '#bce8f1', '#faebcc', '#ebccd1'])
 
 var dynamicColor;
+var colorOnHover = '#3c763d';
 
-d3.select('#bar-chart').append('svg')
+var awesome = d3.select('#bar-chart').append('svg')
   .attr('width', width)
   .attr('height', height)
   .style('background', '#dff0d8')
@@ -49,9 +50,7 @@ d3.select('#bar-chart').append('svg')
   .enter().append('rect')
     .style({'fill': function(data,i){return colors(i);},  'stroke': '#31708f', 'stroke-width': '5'})
     .attr('width', xScale.rangeBand())
-    .attr('height', function (data) {
-        return yScale(data);
-    })
+    .attr('height', 0)
     .attr('x', function (data, i) {
         return xScale(i);
     })
@@ -61,15 +60,32 @@ d3.select('#bar-chart').append('svg')
     .on('mouseover', function(data) {
         dynamicColor = this.style.fill;
         d3.select(this)
-            .style('fill', '#3c763d')
+            .style('fill', colorOnHover)
     })
  
     .on('mouseout', function(data) {
         d3.select(this)
             .style('fill', dynamicColor)
     });
+    
+    awesome.transition()
+    .attr('height', function (data) {
+        return yScale(data);
+    })
+    .attr('y', function (data) {
+        return height - yScale(data);
+    })
+    .delay(function (data, i) {
+        return i * 20;
+    })
+    .duration(2000)
+    .ease('elastic');
+
 </script>
 </br>
+
+
+
 
 
 </body>
