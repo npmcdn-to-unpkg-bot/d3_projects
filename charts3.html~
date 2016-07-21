@@ -7,28 +7,79 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <div class="chart">
     <h2>Create A Bar Chart With D3 JavaScript</h2>
+    
+
+  <input type="number" id = 0  value = 10>
+  <input type="number" id = 1  value = 20>
+  <input type="number" id = 2  value = 30>
+  <input type="number" id = 3  value = 40>
+  <input type="number" id = 4  value = 50>
+  <input type="number" id = 5  value = 60></br>
+  <input type="number" id = 6  value = 70>
+  <input type="number" id = 7  value = 80>
+  <input type="number" id = 8  value = 90>
+  <input type="number" id = 9  value = 100>
+  <input type="number" id = 10 value = 110>
+  <input type="number" id = 11 value = 120></br>
+  <input type="number" id = 12 value = 135>
+  <input type="number" id = 13 value = 150>
+  <input type="number" id = 14 value = 165>
+  <input type="number" id = 15 value = 180>
+  <input type="number" id = 16 value = 200>
+  <input type="number" id = 17 value = 220></br>
+  <input type="number" id = 18 value = 240>
+  <input type="number" id = 19 value = 270>
+  <input type="number" id = 20 value = 300>
+  <input type="number" id = 21 value = 330>
+  <input type="number" id = 22 value = 370>
+  <input type="number" id = 23 value = 450></br>
+  <button onclick="myFunction()" >Update Graph</button>
+
+</br>
+    
     <div id="bar-chart">
  
     </div>
+    
+    
 </div>
 <script>
-var chartdata = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120,
-    135, 150, 165, 180, 200, 220, 240, 270, 300, 330, 370, 450, 550];
 
+
+
+
+function myFunction(){
+//default data for the chart
+var chartdata = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120,
+    135, 150, 165, 180, 200, 220, 240, 270, 300, 330, 370, 450];
 var dd = '{ ' + 
 						'"margin"    : [{"top": 30, "right": 10, "bottom": 30, "left": 50}],' + 
 						'"dimension" : [{"height": 400, "width": 720, "barWidth": 40, "barOffSet" : 20}]' +
 								'}';
-								
-								
 var data = JSON.parse(dd);
- 
+
 var height = data.dimension[0].height - data.margin[0].top - data.margin[0].bottom,
     width = data.dimension[0].width - data.margin[0].left - data.margin[0].right,
     barWidth = data.dimension[0].barWidth,
-    barOffset = data.dimension[0].barOffSet;
+    barOffset = data.dimension[0].barOffSet;  							
+								
+
+ 
+
  
 var dynamicColor;
+//overriding data from the user
+  for(i=0;i<=22;i++){
+  	chartdata[i]=document.getElementById(i).value;
+	}
+
+chartdata[2]=document.getElementById(2).value;
+height = data.dimension[0].height - data.margin[0].top - data.margin[0].bottom,
+width = data.dimension[0].width - data.margin[0].left - data.margin[0].right,
+barWidth = data.dimension[0].barWidth,
+barOffset = data.dimension[0].barOffSet;    
+
+
  
 var yScale = d3.scale.linear()
     .domain([0, d3.max(chartdata)])
@@ -86,11 +137,9 @@ awesome.transition()
     .ease('elastic')
  
 
-drawXaxis();
-drawYaxis();
 
 // draws the x-axis
-function drawYaxis(){
+
   var verticalGuideScale = d3.scale.linear()
     .domain([0, d3.max(chartdata)])
     .range([height, 0])
@@ -106,10 +155,9 @@ function drawYaxis(){
     .style({fill: 'none', stroke: "#3c763d"})
   verticalGuide.selectAll('line')
     .style({stroke: "#3c763d"})
-}
+
 
 // draws the x-axis
-function drawXaxis(){
   var horizontalGuideScale = d3.scale.ordinal()
     .domain(d3.range(0, chartdata.length))
     .rangeBands([0, width])
