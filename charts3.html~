@@ -69,11 +69,10 @@ var height = data.dimension[0].height - data.margin[0].top - data.margin[0].bott
  
 var dynamicColor;
 //overriding data from the user
-  for(i=0;i<=22;i++){
+  for(i=0;i<=23;i++){
   	chartdata[i]=document.getElementById(i).value;
 	}
 
-chartdata[2]=document.getElementById(2).value;
 height = data.dimension[0].height - data.margin[0].top - data.margin[0].bottom,
 width = data.dimension[0].width - data.margin[0].left - data.margin[0].right,
 barWidth = data.dimension[0].barWidth,
