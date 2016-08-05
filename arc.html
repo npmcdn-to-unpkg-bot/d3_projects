@@ -15,8 +15,8 @@
   var arc = d3.svg.arc()
     .innerRadius(50)
     .outerRadius(70)
-    .startAngle(45 * (pi/180)) //converting from degs to radians
-    .endAngle(3) //just radians
+    .startAngle(degToRad(90)) //converting from degs to radians
+    .endAngle(degToRad(270))  //just radians
     
   vis.attr("width", "400").attr("height", "400") // Added height and width so arc is visible
     .append("path")
@@ -24,6 +24,10 @@
     .attr("fill", "red")
     .attr("transform", "translate(200,200)");
 	
+	
+	function degToRad(deg){
+	  return deg * (pi/180);
+	}
 	                       
 	
 </script>
